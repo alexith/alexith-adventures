@@ -17,6 +17,10 @@ public class BugController : MonoBehaviour
 
     public Vector3 moveDirection;
 
+    public float waitToReload;
+    private bool reloading;
+    private gameObject thePlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,8 +59,25 @@ public class BugController : MonoBehaviour
                 moveDirection = new Vector3(Random.Range (-1f, 1f) * moveSpeed, Random.Range(-1f, 1f) * moveSpeed, 0f);
             }
         }
+        if(reloading)
+        {
+            waitToReload -= Time.deltaTime;
+            if(waitToReload < 0)
+            {
+                Application.LoadLevel(Application.loadedLevel);
+                thePlayer.SetActive(true);
+            }
+        }
     }
-    
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.name == "Player")
+        {
+            other.gameObject.SetActive(false);
+            reloading = true;
+            thePlayer = other.gameObject;
+        }
+    }   
 }
 
 
