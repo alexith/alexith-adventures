@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BugController : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class BugController : MonoBehaviour
 
     public float waitToReload;
     private bool reloading;
-    private gameObject thePlayer;
+    private GameObject thePlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -59,12 +60,13 @@ public class BugController : MonoBehaviour
                 moveDirection = new Vector3(Random.Range (-1f, 1f) * moveSpeed, Random.Range(-1f, 1f) * moveSpeed, 0f);
             }
         }
+
         if(reloading)
         {
             waitToReload -= Time.deltaTime;
             if(waitToReload < 0)
             {
-                Application.LoadLevel(Application.loadedLevel);
+                Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
                 thePlayer.SetActive(true);
             }
         }
