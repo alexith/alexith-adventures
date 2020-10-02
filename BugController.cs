@@ -21,9 +21,11 @@ public class BugController : MonoBehaviour
     void Start()
     {
        myRigidbody = GetComponent<Rigidbody2D>();
-       timeBetweenMoveCounter = timeBetweenMove;
-       timeToMoveCounter = timeToMove;
-        
+       //timeBetweenMoveCounter = timeBetweenMove;
+       //timeToMoveCounter = timeToMove;
+
+       timeBetweenMoveCounter = Random.Range (timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
+       timeToMoveCounter = Random.Range (timeToMove * 0.74f, timeBetweenMove * 1.25f);
     }
 
     // Update is called once per frame
@@ -37,7 +39,8 @@ public class BugController : MonoBehaviour
             if(timeToMoveCounter < 0f)
             {
                 moving = false;
-                timeBetweenMoveCounter = timeBetweenMove;
+                //timeBetweenMoveCounter = timeBetweenMove;
+                timeBetweenMoveCounter = Random.Range (timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
             }
         } else {
             timeBetweenMoveCounter -= Time.deltaTime;
@@ -46,12 +49,14 @@ public class BugController : MonoBehaviour
             if(timeBetweenMoveCounter < 0f)
             {
                 moving = true;
-                timeToMoveCounter = timeToMove;
+                //timeToMoveCounter = timeToMove;
+                timeToMoveCounter = Random.Range (timeToMove * 0.75f, timeBetweenMove * 1.25f);
 
                 moveDirection = new Vector3(Random.Range (-1f, 1f) * moveSpeed, Random.Range(-1f, 1f) * moveSpeed, 0f);
             }
         }
     }
+    
 }
 
 
