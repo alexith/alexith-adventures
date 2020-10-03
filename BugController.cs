@@ -30,7 +30,7 @@ public class BugController : MonoBehaviour
        //timeToMoveCounter = timeToMove;
 
        timeBetweenMoveCounter = Random.Range (timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
-       timeToMoveCounter = Random.Range (timeToMove * 0.74f, timeBetweenMove * 1.25f);
+       timeToMoveCounter = Random.Range (timeToMove * 0.75f, timeBetweenMove * 1.25f);
     }
 
     // Update is called once per frame

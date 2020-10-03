@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
+    public float moveSpeed = 5f;
 
     private Animator anim;
     private Rigidbody2D myRigidbody;
@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public Vector2 lastMove;
 
     private static bool playerExists;
+
+    public Camera cam;
+
+    Vector2 mousePos;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mousePos = cam.ScreenToWorldProject(Input.mousePosition)
+
         playerMoving = false;
         if (Input.GetAxisRaw("Horizontal") < 0.5f || Input.GetAxisRaw("Horizontal") > -0.5f)
         {
@@ -64,5 +70,11 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("PlayerMoving", playerMoving);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
+    }
+
+    void FixedUpdate(){
+        Vector lookDir = mousePos - rb.position;
+        float angle = mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg * 90f;
+        rb.rotation = angle;
     }
 }
