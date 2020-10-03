@@ -14,9 +14,6 @@ public class PlayerController : MonoBehaviour
 
     private static bool playerExists;
 
-    public Camera cam;
-
-    Vector2 mousePos;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +35,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
         playerMoving = false;
         if (Input.GetAxisRaw("Horizontal") < 0.5f || Input.GetAxisRaw("Horizontal") > -0.5f)
         {
@@ -70,11 +65,5 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("PlayerMoving", playerMoving);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
-
-        void FixedUpdate(){
-        Vector2 lookDir = mousePos - myRigidbody.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg * 90f;
-        myRigidbody.rotation = angle;
-    }
     }
 }
